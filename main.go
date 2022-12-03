@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bookshop/protos"
+	"bookshopV1/protos"
 	"context"
 	"fmt"
 	"net"

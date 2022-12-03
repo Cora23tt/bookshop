@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"bookshop/protos"
+	"bookshopV1/protos"
 	"context"
 	"log"
 	"net/http"
