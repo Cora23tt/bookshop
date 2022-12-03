@@ -1,0 +1,130 @@
+definitions:
+  protos.Book:
+    properties:
+      Author:
+        type: string
+      GenreID:
+        type: integer
+      ID:
+        type: integer
+      Title:
+        type: string
+      TotalPages:
+        type: integer
+    type: object
+  protos.BookID:
+    properties:
+      ID:
+        type: integer
+    type: object
+  protos.Genre:
+    properties:
+      GenreId:
+        type: integer
+      Name:
+        type: string
+    type: object
+  protos.GenreResponse:
+    properties:
+      genres:
+        items:
+          $ref: '#/definitions/protos.Genre'
+        type: array
+    type: object
+info:
+  contact: {}
+paths:
+  /:
+    delete:
+      parameters:
+      - description: book id
+        in: header
+        name: id
+        required: true
+        type: number
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/protos.BookID'
+      summary: Deletes book
+      tags:
+      - book
+    post:
+      parameters:
+      - description: book
+        in: body
+        name: book
+        required: true
+        schema:
+          $ref: '#/definitions/protos.Book'
+      responses: {}
+      summary: Updates book
+      tags:
+      - book
+    put:
+      parameters:
+      - description: book
+        in: body
+        name: book
+        required: true
+        schema:
+          $ref: '#/definitions/protos.Book'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/protos.BookID'
+      summary: Creates book
+      tags:
+      - book
+  /{id}:
+    get:
+      parameters:
+      - description: bookid
+        in: path
+        name: id
+        required: true
+        type: number
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/protos.Book'
+      summary: Recives book by id number
+      tags:
+      - book
+  /genre:
+    put:
+      parameters:
+      - description: genre
+        in: body
+        name: genre
+        required: true
+        schema:
+          $ref: '#/definitions/protos.Genre'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/protos.Genre'
+      summary: Creates new genre
+      tags:
+      - genre
+  /genre/{limit}:
+    get:
+      parameters:
+      - description: Limit count of genres
+        in: path
+        name: limit
+        required: true
+        type: number
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/protos.GenreResponse'
+      summary: Recives list of genres
+      tags:
+      - genre
+swagger: "2.0"

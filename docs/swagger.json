@@ -1,0 +1,205 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/": {
+            "put": {
+                "tags": [
+                    "book"
+                ],
+                "summary": "Creates book",
+                "parameters": [
+                    {
+                        "description": "book",
+                        "name": "book",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/protos.Book"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/protos.BookID"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "book"
+                ],
+                "summary": "Updates book",
+                "parameters": [
+                    {
+                        "description": "book",
+                        "name": "book",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/protos.Book"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "delete": {
+                "tags": [
+                    "book"
+                ],
+                "summary": "Deletes book",
+                "parameters": [
+                    {
+                        "type": "number",
+                        "description": "book id",
+                        "name": "id",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/protos.BookID"
+                        }
+                    }
+                }
+            }
+        },
+        "/genre": {
+            "put": {
+                "tags": [
+                    "genre"
+                ],
+                "summary": "Creates new genre",
+                "parameters": [
+                    {
+                        "description": "genre",
+                        "name": "genre",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/protos.Genre"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/protos.Genre"
+                        }
+                    }
+                }
+            }
+        },
+        "/genre/{limit}": {
+            "get": {
+                "tags": [
+                    "genre"
+                ],
+                "summary": "Recives list of genres",
+                "parameters": [
+                    {
+                        "type": "number",
+                        "description": "Limit count of genres",
+                        "name": "limit",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/protos.GenreResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/{id}": {
+            "get": {
+                "tags": [
+                    "book"
+                ],
+                "summary": "Recives book by id number",
+                "parameters": [
+                    {
+                        "type": "number",
+                        "description": "bookid",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/protos.Book"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "protos.Book": {
+            "type": "object",
+            "properties": {
+                "Author": {
+                    "type": "string"
+                },
+                "GenreID": {
+                    "type": "integer"
+                },
+                "ID": {
+                    "type": "integer"
+                },
+                "Title": {
+                    "type": "string"
+                },
+                "TotalPages": {
+                    "type": "integer"
+                }
+            }
+        },
+        "protos.BookID": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "integer"
+                }
+            }
+        },
+        "protos.Genre": {
+            "type": "object",
+            "properties": {
+                "GenreId": {
+                    "type": "integer"
+                },
+                "Name": {
+                    "type": "string"
+                }
+            }
+        },
+        "protos.GenreResponse": {
+            "type": "object",
+            "properties": {
+                "genres": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/protos.Genre"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package protos;
+
+option go_package = "./protos";
+
+service BookService {
+    rpc GetBookById(BookID) returns(Book);
+    rpc CreateBook(Book)    returns(BookID);
+    rpc DeleteBook(BookID)  returns(BookID);
+    rpc EditBook(Book) returns(Book);
+    rpc CreateGenre(Genre)  returns(Genre);
+    rpc GetGenres(Empty)    returns(GenreResponse);
+}
+
+message Book {
+    int32   ID          =   1;
+    int32   TotalPages  =   2;
+    int32   GenreID     =   3;
+    string  Title       =   4;
+    string  Author      =   5;
+}
+
+message BookID {
+    int32   ID          =   1;
+}
+
+message Genre {
+    int32 GenreId = 1;
+    string Name = 2;
+}
+
+message GenreResponse {
+    repeated Genre genres = 1;
+}
+
+message Empty {
+    int32 limit = 1;
+}
